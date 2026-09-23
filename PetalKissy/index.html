@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petal Kiss Closet — Curated Preloved Fashion</title>
+<meta name="description" content="Petal Kiss Closet — a curated online thrift boutique for preloved women's fashion. Sustainable, quality-checked, affordable luxury.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,500;1,700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  /* ============ DESIGN TOKENS ============ */
+  :root{
+    --petal:#FFF8FA;
+    --blush:#FDEAF1;
+    --pink-100:#FBD9E6;
+    --pink-200:#F7BBD3;
+    --pink-300:#F19CBC;
+    --rose:#DE6C93;
+    --rose-deep:#C24E77;
+    --gold:#C6A15B;
+    --gold-soft:#EAD9BC;
+    --sage:#A9B99D;
+    --sage-soft:#E4EBDD;
+    --ink:#4B2E3C;
+    --muted:#9B7488;
+    --white:#FFFCFD;
+    --grad-rose:linear-gradient(135deg,#F19CBC 0%,#DE6C93 55%,#C24E77 100%);
+    --grad-gold:linear-gradient(135deg,#E7CE9C,#C6A15B);
+    --shadow-soft:0 24px 50px -24px rgba(194,78,119,.28);
+    --shadow-card:0 10px 30px -14px rgba(194,78,119,.22);
+    --radius-lg:1.5rem;
+    --ease:cubic-bezier(.22,1,.36,1);
+    --tr:all .35s var(--ease);
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Poppins',sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(60rem 40rem at 110% -10%, rgba(247,187,211,.35), transparent 60%),
+      radial-gradient(50rem 36rem at -15% 30%, rgba(234,217,188,.28), transparent 60%),
+      radial-gradient(45rem 40rem at 50% 115%, rgba(228,235,221,.35), transparent 60%),
+      var(--petal);
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--pink-200);color:var(--rose-deep)}
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-track{background:var(--blush)}
+  ::-webkit-scrollbar-thumb{background:linear-gradient(var(--pink-300),var(--rose));border-radius:99px;border:2px solid var(--blush)}
+
+  .font-brand{font-family:'Dancing Script',cursive}
+  .font-display{font-family:'Playfair Display',serif}
+  .accent{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;
+    background:var(--grad-rose);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .text-rose{color:var(--rose)} .text-rose-deep{color:var(--rose-deep)} .text-gold{color:var(--gold)}
+  .text-muted-c{color:var(--muted)}
+
+  /* ============ GLASS / CARDS / BUTTONS ============ */
+  .glass{background:rgba(255,252,253,.72);backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5)}
+  .card{background:var(--white);border:1px solid rgba(247,187,211,.5);border-radius:var(--radius-lg);box-shadow:var(--shadow-card)}
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:.5rem;justify-content:center;
+    background:var(--grad-rose);color:#fff;font-weight:500;border-radius:999px;
+    padding:.85rem 1.9rem;box-shadow:0 14px 30px -12px rgba(194,78,119,.55);
+    transition:var(--tr);cursor:pointer;border:none;letter-spacing:.01em;
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 38px -14px rgba(194,78,119,.65);filter:brightness(1.04)}
+  .btn-primary:active{transform:translateY(0) scale(.98)}
+  .btn-ghost{
+    display:inline-flex;align-items:center;gap:.5rem;justify-content:center;
+    border:1px solid rgba(222,108,147,.35);color:var(--rose-deep);font-weight:500;
+    border-radius:999px;padding:.85rem 1.9rem;background:rgba(255,255,255,.6);
+    backdrop-filter:blur(8px);transition:var(--tr);cursor:pointer;
+  }
+  .btn-ghost:hover{background:var(--blush);transform:translateY(-2px);border-color:rgba(222,108,147,.6)}
+  .icon-btn{
+    position:relative;display:inline-flex;align-items:center;justify-content:center;
+    width:2.75rem;height:2.75rem;border-radius:999px;transition:var(--tr);cursor:pointer;
+    color:var(--ink);background:transparent;border:none;
+  }
+  .icon-btn:hover{background:var(--blush);color:var(--rose-deep);transform:translateY(-1px)}
+
+  .input{
+    width:100%;border-radius:.9rem;border:1px solid rgba(247,187,211,.7);
+    background:rgba(255,255,255,.85);padding:.8rem 1rem;font-size:.9rem;color:var(--ink);
+    outline:none;transition:var(--tr);
+  }
+  .input::placeholder{color:#C9A3B4}
+  .input:focus{border-color:var(--rose);box-shadow:0 0 0 4px rgba(222,108,147,.14)}
+  .input-error{border-color:#F06292 !important;box-shadow:0 0 0 4px rgba(240,98,146,.18) !important;animation:shake .35s var(--ease)}
+  @keyframes shake{25%{transform:translateX(-4px)}50%{transform:translateX(4px)}75%{transform:translateX(-2px)}}
+  select.input{appearance:none;-webkit-appearance:none;background-image:none;padding-right:2.4rem}
+
+  .kicker{font-family:'Dancing Script',cursive;color:var(--rose);font-size:1.35rem;font-weight:600;display:inline-flex;align-items:center;gap:.6rem}
+  .kicker::before,.kicker::after{content:"";height:1px;width:2rem;background:linear-gradient(90deg,transparent,var(--pink-300))}
+  .kicker::after{background:linear-gradient(90deg,var(--pink-300),transparent)}
+
+  /* ============ NAV ============ */
+  .nav-link{position:relative;font-size:.86rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--ink);transition:var(--tr);padding:.4rem .1rem}
+  .nav-link::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:2px;background:var(--grad-rose);transform:scaleX(0);transform-origin:center;transition:transform .35s var(--ease)}
+  .nav-link:hover{color:var(--rose-deep)}
+  .nav-link.active{color:var(--rose-deep)}
+  .nav-link.active::after{transform:scaleX(1)}
+  .bottom-nav-item{display:flex;flex-direction:column;align-items:center;gap:.15rem;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.55rem 1.1rem;border-radius:1rem;transition:var(--tr)}
+  .bottom-nav-item.active{color:var(--rose-deep);background:var(--blush)}
+
+  /* ============ PETALS ============ */
+  #petals{position:fixed;inset:0;z-index:35;pointer-events:none;overflow:hidden}
+  .petal{position:absolute;top:-6vh;animation:pkc-fall linear infinite;will-change:transform}
+  .petal span{display:block;border-radius:110% 6px 110% 6px;animation:pkc-sway ease-in-out infinite alternate;box-shadow:inset 0 0 6px rgba(255,255,255,.5)}
+  .petal.far span{filter:blur(1.6px)}
+  @keyframes pkc-fall{to{transform:translateY(118vh) rotate(var(--rot,220deg))}}
+  @keyframes pkc-sway{
+    0%{transform:translateX(calc(var(--sway,26px) * -1)) rotate(-24deg) scaleY(1)}
+    50%{transform:translateX(0) rotate(6deg) scaleY(.86)}
+    100%{transform:translateX(var(--sway,26px)) rotate(28deg) scaleY(1)}
+  }
+
+  /* ============ MARQUEE ============ */
+  .marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .marquee-track{display:flex;align-items:center;gap:3rem;width:max-content;animation:pkc-marquee 28s linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  @keyframes pkc-marquee{to{transform:translateX(-50%)}}
+  .spin-slower{animation:pkc-spin 9s linear infinite}
+  @keyframes pkc-spin{to{transform:rotate(360deg)}}
+
+  /* ============ CHIPS ============ */
+  .chip{
+    display:inline-flex;align-items:center;gap:.45rem;padding:.55rem 1.15rem;border-radius:999px;
+    font-size:.82rem;font-weight:500;color:var(--ink);background:rgba(255,255,255,.75);
+    border:1px solid rgba(247,187,211,.7);transition:var(--tr);cursor:pointer;white-space:nowrap;
+  }
+  .chip:hover{transform:translateY(-2px);border-color:var(--rose);color:var(--rose-deep);box-shadow:var(--shadow-card)}
+  .chip.active{background:var(--grad-rose);color:#fff;border-color:transparent;box-shadow:0 10px 22px -10px rgba(194,78,119,.6)}
+  .chip .count{font-size:.66rem;opacity:.75;font-weight:400}
+
+  /* ============ PRODUCT CARD ============ */
+  .product-card{transition:var(--tr)}
+  .product-card:hover{transform:translateY(-6px);box-shadow:0 26px 50px -22px rgba(194,78,119,.4);border-color:var(--pink-300)}
+  .product-card .p-img{transition:transform 1s var(--ease),opacity .6s ease}
+  .product-card:hover .p-img{transform:scale(1.08)}
+  .badge{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.3rem .7rem;border-radius:999px;color:#fff;box-shadow:0 6px 14px -6px rgba(75,46,60,.4)}
+  .badge.hot{background:var(--grad-rose)}
+  .badge.new{background:var(--grad-gold)}
+  .cond-pill{display:inline-flex;align-items:center;gap:.35rem;font-size:.68rem;font-weight:500;padding:.24rem .65rem;border-radius:999px}
+  .cond-pill i{width:.4rem;height:.4rem;border-radius:99px;display:inline-block}
+  .cond-like-new{background:var(--blush);color:var(--rose-deep)} .cond-like-new i{background:var(--rose)}
+  .cond-excellent{background:#F6EEDA;color:#9A7A33} .cond-excellent i{background:var(--gold)}
+  .cond-gently-used{background:var(--sage-soft);color:#5E7351} .cond-gently-used i{background:var(--sage)}
+  .wish-btn{width:2.3rem;height:2.3rem;border-radius:99px;display:flex;align-items:center;justify-content:center;background:rgba(255,252,253,.85);backdrop-filter:blur(8px);color:var(--rose);transition:var(--tr);border:1px solid rgba(247,187,211,.6);cursor:pointer;box-shadow:0 6px 16px -8px rgba(194,78,119,.5)}
+  .wish-btn:hover{transform:scale(1.12)}
+  .wish-btn.active{background:var(--grad-rose);color:#fff;border-color:transparent}
+  .wish-btn.active svg{fill:currentColor}
+  .add-btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;width:100%;padding:.68rem 1rem;border-radius:.9rem;font-size:.82rem;font-weight:500;color:var(--rose-deep);background:var(--blush);border:1px solid rgba(247,187,211,.8);transition:var(--tr);cursor:pointer}
+  .add-btn:hover{background:var(--grad-rose);color:#fff;border-color:transparent;box-shadow:0 12px 24px -10px rgba(194,78,119,.55)}
+  .add-btn:active{transform:scale(.97)}
+
+  /* ============ OVERLAYS / SIDEBAR / MODALS ============ */
+  #pageOverlay{position:fixed;inset:0;z-index:60;background:rgba(75,46,60,.38);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
+  #pageOverlay.open{opacity:1;pointer-events:auto}
+  #cartSidebar{position:fixed;top:0;right:0;height:100dvh;width:100%;max-width:26rem;z-index:70;background:var(--white);box-shadow:-30px 0 60px -30px rgba(75,46,60,.35);transform:translateX(102%);transition:transform .55s var(--ease);display:flex;flex-direction:column;border-left:1px solid var(--pink-100)}
+  #cartSidebar.open{transform:translateX(0)}
+  .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .35s var(--ease)}
+  .modal .modal-bg{position:absolute;inset:0;background:rgba(75,46,60,.45);backdrop-filter:blur(6px)}
+  .modal .panel{position:relative;transform:translateY(24px) scale(.97);transition:transform .45s var(--ease)}
+  .modal.open{opacity:1;pointer-events:auto}
+  .modal.open .panel{transform:translateY(0) scale(1)}
+  #checkoutModal{z-index:90} #successModal{z-index:100}
+
+  .pay-card{display:flex;align-items:flex-start;gap:.8rem;width:100%;text-align:left;padding:.9rem 1rem;border-radius:1rem;border:1.5px solid rgba(247,187,211,.8);background:rgba(255,255,255,.8);transition:var(--tr);cursor:pointer}
+  .pay-card:hover{border-color:var(--rose);transform:translateY(-1px)}
+  .pay-card.selected{border-color:var(--rose);background:var(--blush);box-shadow:0 10px 24px -12px rgba(194,78,119,.45)}
+  .pay-radio{width:1.05rem;height:1.05rem;border-radius:99px;border:2px solid var(--pink-300);margin-top:.15rem;flex:none;display:flex;align-items:center;justify-content:center;transition:var(--tr)}
+  .pay-card.selected .pay-radio{border-color:var(--rose-deep);background:var(--grad-rose);box-shadow:inset 0 0 0 2.5px #fff}
+
+  /* ============ TOASTS ============ */
+  #toasts{position:fixed;top:5.5rem;right:1rem;z-index:110;display:flex;flex-direction:column;gap:.6rem;align-items:flex-end;pointer-events:none}
+  .toast{
+    display:flex;align-items:center;gap:.7rem;background:rgba(255,252,253,.92);backdrop-filter:blur(14px);
+    border:1px solid var(--pink-100);border-radius:1rem;padding:.8rem 1.1rem;box-shadow:var(--shadow-soft);
+    font-size:.85rem;color:var(--ink);animation:toast-in .5s var(--ease);max-width:20rem;position:relative;overflow:hidden;
+  }
+  .toast::after{content:"";position:absolute;left:0;bottom:0;height:2.5px;width:100%;background:var(--grad-rose);transform-origin:left;animation:toast-bar 3s linear forwards}
+  .toast.out{animation:toast-out .4s var(--ease) forwards}
+  @keyframes toast-in{from{opacity:0;transform:translateX(30px) scale(.95)}to{opacity:1;transform:none}}
+  @keyframes toast-out{to{opacity:0;transform:translateX(30px) scale(.95)}}
+  @keyframes toast-bar{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+
+  /* ============ REVEAL / MISC ANIM ============ */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .reveal.in{opacity:1;transform:none;transition:var(--tr)}
+  .float-soft{animation:pkc-float 6s ease-in-out infinite}
+  .float-soft-2{animation:pkc-float 7.5s ease-in-out 1s infinite}
+  @keyframes pkc-float{50%{transform:translateY(-12px)}}
+  .badge-pop{animation:pkc-pop .45s var(--ease)}
+  @keyframes pkc-pop{40%{transform:scale(1.5)}}
+  .spin{animation:pkc-spin 1s linear infinite}
+  .check-ring{animation:pkc-pop .7s var(--ease)}
+  .status-pill{font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .7rem;border-radius:999px;background:#FDF3E0;color:#A97B1F;border:1px solid #F1DFAF}
+
+  .hero-ring{position:absolute;border:1.5px dashed rgba(198,161,91,.55);border-radius:999px;animation:pkc-spin 40s linear infinite}
+  .watermark{position:absolute;font-family:'Dancing Script',cursive;color:rgba(222,108,147,.07);user-select:none;pointer-events:none;white-space:nowrap;line-height:1}
+
+  .stat-num{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(1.9rem,4vw,2.8rem);color:#fff}
+  .stat-band{background:linear-gradient(120deg,#E88CAB,#DE6C93 45%,#C24E77);position:relative;overflow:hidden}
+  .stat-band::before{content:"";position:absolute;inset:0;background:radial-gradient(30rem 14rem at 20% 0%,rgba(255,255,255,.22),transparent 60%)}
+
+  .testi-card{position:relative}
+  .testi-card .qmark{position:absolute;top:-1.1rem;left:1.4rem;width:2.4rem;height:2.4rem;border-radius:99px;background:var(--grad-rose);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 20px -8px rgba(194,78,119,.6)}
+
+  .contact-card{transition:var(--tr)}
+  .contact-card:hover{transform:translateY(-5px);border-color:var(--pink-300);box-shadow:var(--shadow-soft)}
+  .contact-card:hover .contact-ico{background:var(--grad-rose);color:#fff}
+  .contact-ico{transition:var(--tr)}
+
+  .step-dot{width:2.2rem;height:2.2rem;border-radius:99px;background:var(--blush);color:var(--rose-deep);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.85rem;flex:none;border:1px solid var(--pink-200)}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001s !important;transition-duration:.001s !important}
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ambient blobs -->
+<div class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
+  <div class="absolute -top-24 -right-24 w-[34rem] h-[34rem] rounded-full opacity-40" style="background:radial-gradient(circle,#F7BBD3,transparent 65%)"></div>
+  <div class="absolute top-[45%] -left-40 w-[30rem] h-[30rem] rounded-full opacity-35" style="background:radial-gradient(circle,#EAD9BC,transparent 65%)"></div>
+  <div class="absolute bottom-0 right-[15%] w-[26rem] h-[26rem] rounded-full opacity-30" style="background:radial-gradient(circle,#E4EBDD,transparent 65%)"></div>
+</div>
+
+<!-- falling petals -->
+<div id="petals" aria-hidden="true"></div>
+
+<!-- ================= HEADER ================= -->
+<header class="glass sticky top-0 z-40 border-b border-[rgba(247,187,211,.55)]" style="box-shadow:0 10px 30px -18px rgba(194,78,119,.25)">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between gap-3 h-[4.4rem]">
+      <!-- Logo -->
+      <button data-action="nav-view" data-view="shop" class="flex items-center gap-2.5 cursor-pointer group bg-transparent border-none p-0" aria-label="Petal Kiss Closet home">
+        <span class="w-10 h-10 rounded-full flex items-center justify-center text-white transition-transform duration-500 group-hover:rotate-[25deg]" style="background:var(--grad-rose);box-shadow:0 10px 20px -8px rgba(194,78,119,.6)">
+          <i data-lucide="flower-2" class="w-5 h-5"></i>
+        </span>
+        <span class="text-left leading-none">
+          <span class="font-brand block text-[1.55rem] sm:text-[1.7rem] font-bold" style="background:var(--grad-rose);-webkit-background-clip:text;background-clip:text;color:transparent">Petal Kiss Closet</span>
+          <span class="hidden sm:block text-[.58rem] tracking-[.32em] uppercase text-muted-c mt-0.5">preloved · reloved</span>
+        </span>
+      </button>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-8">
+        <button class="nav-link bg-transparent border-none cursor-pointer" data-action="nav-view" data-view="shop" data-nav="shop">Shop</button>
+        <button class="nav-link bg-transparent border-none cursor-pointer" data-action="nav-view" data-view="about" data-nav="about">About</button>
+        <button class="nav-link bg-transparent border-none cursor-pointer" data-action="nav-view" data-view="profile" data-nav="profile">Profile</button>
+      </nav>
+
+      <!-- Search (desktop) -->
+      <div class="hidden lg:flex items-center relative w-64">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3.5 text-muted-c pointer-events-none"></i>
+        <input type="text" class="input search-input !rounded-full !pl-10 !py-2.5 text-sm" placeholder="Search dresses, bags, pearls…" aria-label="Search products">
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-1">
+        <button class="icon-btn" data-action="nav-view" data-view="profile" aria-label="Profile">
+          <span id="headerAvatar"><i data-lucide="user" class="w-5 h-5"></i></span>
+        </button>
+        <button class="icon-btn" data-action="open-cart" aria-label="Open shopping bag">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          <span id="cartBadge" class="absolute -top-0.5 -right-0.5 min-w-[1.15rem] h-[1.15rem] px-1 rounded-full text-white text-[.62rem] font-semibold flex items-center justify-center transition-transform duration-300 scale-0" style="background:var(--grad-rose);box-shadow:0 4px 10px -3px rgba(194,78,119,.7)">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Search (mobile) -->
+    <div class="lg:hidden pb-3 -mt-1">
+      <div class="relative">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-c pointer-events-none"></i>
+        <input type="text" class="input search-input !rounded-full !pl-10 !py-2.5 text-sm w-full" placeholder="Search the closet…" aria-label="Search products">
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="relative z-10 pb-24 md:pb-0">
+
+  <!-- ================= SHOP VIEW ================= -->
+  <section id="view-shop">
+    <!-- HERO -->
+    <div class="relative overflow-hidden">
+      <div class="watermark text-[26vw] top-6 -left-8">bloom</div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 lg:pt-20 pb-14 grid lg:grid-cols-[1.05fr,.95fr] gap-12 lg:gap-8 items-center">
+        <!-- Copy -->
+        <div class="relative z-10 text-center lg:text-left">
+          <p class="kicker reveal">curated preloved luxury</p>
+          <h1 class="font-display font-black mt-4 reveal" style="font-size:clamp(2.6rem,6.2vw,4.7rem);line-height:1.04;transition-delay:.08s">
+            Secondhand.<br><span class="accent">First-class.</span>
+          </h1>
+          <p class="mt-5 text-[.95rem] sm:text-base text-muted-c max-w-md mx-auto lg:mx-0 leading-relaxed reveal" style="transition-delay:.16s">
+            Petal Kiss Closet handpicks preloved women's fashion — each piece quality-checked,
+            steamed, and photographed with love. Luxury that’s gentle on your wallet <em class="accent" style="font-size:1.05em">and</em> the planet.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3.5 reveal" style="transition-delay:.24s">
+            <button class="btn-primary" data-action="scroll-shop">
+              Shop the Collection <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+            <button class="btn-ghost" data-action="nav-view" data-view="about">
+              <i data-lucide="book-open" class="w-4 h-4"></i> Our Story
+            </button>
+          </div>
+          <!-- mini trust stats -->
+          <div class="mt-10 flex items-center justify-center lg:justify-start gap-6 sm:gap-9 reveal" style="transition-delay:.32s">
+            <div class="text-center lg:text-left">
+              <p class="font-display font-bold text-2xl text-rose-deep">500+</p>
+              <p class="text-[.66rem] tracking-[.18em] uppercase text-muted-c mt-0.5">Happy customers</p>
+            </div>
+            <div class="w-px h-9 bg-[var(--pink-200)]"></div>
+            <div class="text-center lg:text-left">
+              <p class="font-display font-bold text-2xl text-rose-deep flex items-center gap-1 justify-center lg:justify-start">4.9 <i data-lucide="star" class="w-4 h-4 text-gold" style="fill:var(--gold)"></i></p>
+              <p class="text-[.66rem] tracking-[.18em] uppercase text-muted-c mt-0.5">Avg. rating</p>
+            </div>
+            <div class="w-px h-9 bg-[var(--pink-200)]"></div>
+            <div class="text-center lg:text-left">
+              <p class="font-display font-bold text-2xl text-rose-deep">2.4k</p>
+              <p class="text-[.66rem] tracking-[.18em] uppercase text-muted-c mt-0.5">Pieces rehomed</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Editorial imagery -->
+        <div class="relative mx-auto w-full max-w-[26rem] lg:max-w-none reveal" style="transition-delay:.2s">
+          <div class="hero-ring w-[112%] h-[112%] -top-[6%] -left-[6%]"></div>
+          <div class="relative rounded-[2rem] overflow-hidden rotate-2 border-[6px] border-white" style="box-shadow:var(--shadow-soft)">
+            <img src="https://images.pexels.com/photos/20096581/pexels-photo-20096581.jpeg?auto=compress&cs=tinysrgb&w=900&h=1150&fit=crop" alt="Woman in dreamy pink tulle gown at twilight" class="w-full h-[26rem] sm:h-[30rem] object-cover" loading="eager" onload="this.style.opacity=1" style="opacity:0;transition:opacity .8s ease">
+            <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 55%,rgba(194,78,119,.35))"></div>
+          </div>
+          <!-- polaroid -->
+          <div class="absolute -bottom-8 -left-3 sm:-left-8 w-32 sm:w-40 rounded-2xl overflow-hidden -rotate-6 border-4 border-white float-soft-2 hidden sm:block" style="box-shadow:var(--shadow-card)">
+            <img src="https://images.pexels.com/photos/8387835/pexels-photo-8387835.jpeg?auto=compress&cs=tinysrgb&w=420&h=520&fit=crop" alt="Boutique rack of dresses" class="w-full h-36 sm:h-44 object-cover" loading="lazy">
+          </div>
+          <!-- floating glass chips -->
+          <div class="glass absolute -top-4 -right-2 sm:-right-5 rounded-2xl px-4 py-3 flex items-center gap-2.5 float-soft border border-[rgba(255,255,255,.9)]" style="box-shadow:var(--shadow-card)">
+            <span class="w-8 h-8 rounded-full flex items-center justify-center text-white" style="background:var(--grad-gold)"><i data-lucide="leaf" class="w-4 h-4"></i></span>
+            <div><p class="text-xs font-semibold">Eco-chic</p><p class="text-[.64rem] text-muted-c">planet-first fashion</p></div>
+          </div>
+          <div class="glass absolute bottom-16 -right-2 sm:-right-6 rounded-2xl px-4 py-3 flex items-center gap-2.5 float-soft-2 border border-[rgba(255,255,255,.9)]" style="box-shadow:var(--shadow-card)">
+            <span class="w-8 h-8 rounded-full flex items-center justify-center text-white" style="background:var(--grad-rose)"><i data-lucide="badge-check" class="w-4 h-4"></i></span>
+            <div><p class="text-xs font-semibold">Quality checked</p><p class="text-[.64rem] text-muted-c">every single piece</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARQUEE -->
+    <div class="marquee border-y border-[rgba(247,187,211,.6)] bg-[rgba(255,252,253,.6)] py-3.5" aria-hidden="true">
+      <div class="marquee-track" id="marqueeTrack"></div>
+    </div>
+
+    <!-- SHOP -->
+    <div id="shopTop" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 scroll-mt-24">
+      <div class="text-center">
+        <p class="kicker reveal">the collection</p>
+        <h2 class="font-display font-bold mt-3 reveal" style="font-size:clamp(1.9rem,4vw,3rem);transition-delay:.08s">Pieces waiting for their <span class="accent">next chapter</span></h2>
+        <p class="text-muted-c text-sm sm:text-[.95rem] mt-3 max-w-xl mx-auto reveal" style="transition-delay:.14s">One-of-a-kind finds, lovingly inspected. When it’s gone, it’s gone — just like a perfect petal on the breeze.</p>
+      </div>
+
+      <!-- Categories -->
+      <div id="categoryChips" class="flex gap-2.5 mt-9 overflow-x-auto pb-2 px-1 justify-start lg:justify-center reveal" style="scrollbar-width:thin;transition-delay:.18s"></div>
+
+      <!-- Controls -->
+      <div class="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 reveal" style="transition-delay:.22s">
+        <p id="resultsMeta" class="text-xs tracking-[.14em] uppercase text-muted-c order-2 sm:order-1 text-center sm:text-left pt-1"></p>
+        <div class="flex items-center gap-3 order-1 sm:order-2">
+          <div class="relative flex-1 sm:flex-none">
+            <select id="sortSelect" class="input !rounded-full text-xs sm:text-sm !py-2.5 cursor-pointer" aria-label="Sort products">
+              <option value="featured">Curated order</option>
+              <option value="newest">Newest arrivals</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+            <i data-lucide="chevron-down" class="w-4 h-4 absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-c pointer-events-none"></i>
+          </div>
+          <div class="relative flex-1 sm:flex-none">
+            <select id="condSelect" class="input !rounded-full text-xs sm:text-sm !py-2.5 cursor-pointer" aria-label="Filter by condition">
+              <option value="all">All conditions</option>
+              <option value="like-new">Like New</option>
+              <option value="excellent">Excellent</option>
+              <option value="gently-used">Gently Used</option>
+            </select>
+            <i data-lucide="chevron-down" class="w-4 h-4 absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-c pointer-events-none"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 mt-8"></div>
+      <div id="gridEmpty" class="hidden text-center py-20">
+        <span class="inline-flex w-16 h-16 rounded-full items-center justify-center mx-auto" style="background:var(--blush)"><i data-lucide="flower" class="w-7 h-7 text-rose"></i></span>
+        <p class="font-display text-xl mt-4">No petals match that breeze</p>
+        <p class="text-sm text-muted-c mt-1">Try a different search or filter, lovely.</p>
+        <button class="btn-ghost mt-6 !py-2.5 !px-6 text-sm" data-action="clear-filters">Clear filters</button>
+      </div>
+    </div>
+
+    <!-- PROMISE STRIP -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
+      <div class="grid sm:grid-cols-3 gap-4">
+        <div class="card p-6 flex items-start gap-4 reveal">
+          <span class="w-11 h-11 rounded-2xl flex items-center justify-center text-white flex-none" style="background:var(--grad-rose)"><i data-lucide="truck" class="w-5 h-5"></i></span>
+          <div><p class="font-display font-bold">Free shipping over ₱999</p><p class="text-xs text-muted-c mt-1 leading-relaxed">Flat ₱80 nationwide below that. Shipped in recycled, petal-pink packaging.</p></div>
+        </div>
+        <div class="card p-6 flex items-start gap-4 reveal" style="transition-delay:.08s">
+          <span class="w-11 h-11 rounded-2xl flex items-center justify-center text-white flex-none" style="background:var(--grad-gold)"><i data-lucide="shield-check" class="w-5 h-5"></i></span>
+          <div><p class="font-display font-bold">Authenticated &amp; inspected</p><p class="text-xs text-muted-c mt-1 leading-relaxed">Every item passes a 12-point quality check before it earns its petal.</p></div>
+        </div>
+        <div class="card p-6 flex items-start gap-4 reveal" style="transition-delay:.16s">
+          <span class="w-11 h-11 rounded-2xl flex items-center justify-center text-white flex-none" style="background:linear-gradient(135deg,#BCCBAC,#A9B99D)"><i data-lucide="recycle" class="w-5 h-5"></i></span>
+          <div><p class="font-display font-bold">Fashion, recirculated</p><p class="text-xs text-muted-c mt-1 leading-relaxed">Each purchase keeps clothing in bloom and out of landfills.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROFILE VIEW ================= -->
+  <section id="view-profile" class="hidden">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16" id="profileRoot"></div>
+  </section>
+
+  <!-- ================= ABOUT VIEW ================= -->
+  <section id="view-about" class="hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16">
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="kicker">our story</p>
+        <h2 class="font-display font-bold mt-3" style="font-size:clamp(1.9rem,4vw,3rem)">Romance, <span class="accent">reworn</span>.</h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mt-12">
+        <div class="relative order-2 lg:order-1">
+          <div class="rounded-[2rem] overflow-hidden border-[6px] border-white rotate-1" style="box-shadow:var(--shadow-soft)">
+            <img src="https://images.pexels.com/photos/8387117/pexels-photo-8387117.jpeg?auto=compress&cs=tinysrgb&w=900&h=680&fit=crop" alt="Woman browsing floral dresses in a boutique" class="w-full h-80 sm:h-96 object-cover" loading="lazy">
+          </div>
+          <div class="absolute -bottom-8 -right-2 sm:right-6 w-36 sm:w-48 rounded-2xl overflow-hidden -rotate-3 border-4 border-white float-soft" style="box-shadow:var(--shadow-card)">
+            <img src="https://images.pexels.com/photos/34833641/pexels-photo-34833641.jpeg?auto=compress&cs=tinysrgb&w=460&h=560&fit=crop" alt="White rose on satin fabric" class="w-full h-40 sm:h-52 object-cover" loading="lazy">
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <p class="text-muted-c leading-relaxed text-[.93rem] sm:text-base">
+            Petal Kiss Closet began with a simple heartbreak: watching beautiful garments — worn once, loved briefly —
+            end up forgotten. We believed every piece deserves a <em class="accent">second love story</em>.
+          </p>
+          <p class="text-muted-c leading-relaxed text-[.93rem] sm:text-base mt-4">
+            Today, we hunt down the finest preloved fashion across the Philippines, put each find through a meticulous
+            12-point inspection, gentle steam, and fresh photography — then match it with someone who’ll adore it next.
+            It’s luxury made affordable, and fashion made kind.
+          </p>
+          <div class="grid sm:grid-cols-3 gap-3 mt-8">
+            <div class="card p-4 text-center">
+              <span class="inline-flex w-9 h-9 rounded-xl items-center justify-center text-white mx-auto" style="background:linear-gradient(135deg,#BCCBAC,#A9B99D)"><i data-lucide="leaf" class="w-4 h-4"></i></span>
+              <p class="font-display font-bold text-sm mt-2">Planet-first</p>
+              <p class="text-[.68rem] text-muted-c mt-1 leading-relaxed">Circular fashion over fast fashion, always.</p>
+            </div>
+            <div class="card p-4 text-center">
+              <span class="inline-flex w-9 h-9 rounded-xl items-center justify-center text-white mx-auto" style="background:var(--grad-rose)"><i data-lucide="badge-check" class="w-4 h-4"></i></span>
+              <p class="font-display font-bold text-sm mt-2">Curated quality</p>
+              <p class="text-[.68rem] text-muted-c mt-1 leading-relaxed">Hand-inspected, steamed &amp; lovingly shot.</p>
+            </div>
+            <div class="card p-4 text-center">
+              <span class="inline-flex w-9 h-9 rounded-xl items-center justify-center text-white mx-auto" style="background:var(--grad-gold)"><i data-lucide="gem" class="w-4 h-4"></i></span>
+              <p class="font-display font-bold text-sm mt-2">Affordable luxury</p>
+              <p class="text-[.68rem] text-muted-c mt-1 leading-relaxed">Up to 70% below original retail.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS BAND -->
+    <div class="stat-band mt-20 py-14">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center relative">
+        <div>
+          <p class="stat-num"><span class="count" data-count="500">0</span>+</p>
+          <p class="text-white/85 text-[.68rem] tracking-[.22em] uppercase mt-1">Happy customers</p>
+        </div>
+        <div>
+          <p class="stat-num flex items-center justify-center gap-2"><span class="count" data-count="4.9" data-decimal="1">0</span><i data-lucide="star" class="w-6 h-6" style="fill:#FBEFC9;color:#FBEFC9"></i></p>
+          <p class="text-white/85 text-[.68rem] tracking-[.22em] uppercase mt-1">Average rating</p>
+        </div>
+        <div>
+          <p class="stat-num"><span class="count" data-count="2400">0</span>+</p>
+          <p class="text-white/85 text-[.68rem] tracking-[.22em] uppercase mt-1">Pieces rehomed</p>
+        </div>
+        <div>
+          <p class="stat-num"><span class="count" data-count="320">0</span>kg</p>
+          <p class="text-white/85 text-[.68rem] tracking-[.22em] uppercase mt-1">Textile waste diverted</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
+      <div class="text-center">
+        <p class="kicker">love letters</p>
+        <h2 class="font-display font-bold mt-3" style="font-size:clamp(1.9rem,4vw,3rem)">From our <span class="accent">petal hearts</span></h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5 mt-14" id="testimonials"></div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-4">
+      <div class="text-center">
+        <p class="kicker">say hello</p>
+        <h2 class="font-display font-bold mt-3" style="font-size:clamp(1.9rem,4vw,3rem)">We’d love to <span class="accent">hear from you</span></h2>
+        <p class="text-muted-c text-sm mt-3">Questions about sizing, sourcing, or selling to us? We reply within 24 hours.</p>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="contact-card card p-6 text-center block">
+          <span class="contact-ico inline-flex w-11 h-11 rounded-2xl items-center justify-center mx-auto" style="background:var(--blush);color:var(--rose-deep)"><i data-lucide="instagram" class="w-5 h-5"></i></span>
+          <p class="font-display font-bold text-sm mt-3">Instagram</p>
+          <p class="text-[.7rem] text-muted-c mt-1">@petalkisscloset</p>
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener" class="contact-card card p-6 text-center block">
+          <span class="contact-ico inline-flex w-11 h-11 rounded-2xl items-center justify-center mx-auto" style="background:var(--blush);color:var(--rose-deep)"><i data-lucide="facebook" class="w-5 h-5"></i></span>
+          <p class="font-display font-bold text-sm mt-3">Facebook</p>
+          <p class="text-[.7rem] text-muted-c mt-1">/petalkisscloset</p>
+        </a>
+        <a href="mailto:hello@petalkisscloset.ph" class="contact-card card p-6 text-center block">
+          <span class="contact-ico inline-flex w-11 h-11 rounded-2xl items-center justify-center mx-auto" style="background:var(--blush);color:var(--rose-deep)"><i data-lucide="mail" class="w-5 h-5"></i></span>
+          <p class="font-display font-bold text-sm mt-3">Email</p>
+          <p class="text-[.7rem] text-muted-c mt-1">hello@petalkisscloset.ph</p>
+        </a>
+        <a href="tel:+639172345678" class="contact-card card p-6 text-center block">
+          <span class="contact-ico inline-flex w-11 h-11 rounded-2xl items-center justify-center mx-auto" style="background:var(--blush);color:var(--rose-deep)"><i data-lucide="phone" class="w-5 h-5"></i></span>
+          <p class="font-display font-bold text-sm mt-3">Phone / Viber</p>
+          <p class="text-[.7rem] text-muted-c mt-1">+63 917 234 5678</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="relative z-10 mt-20 border-t border-[rgba(247,187,211,.6)]" style="background:linear-gradient(180deg,rgba(255,252,253,.6),rgba(253,234,241,.8))">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid md:grid-cols-[1.3fr,1fr,1fr] gap-10">
+    <div>
+      <div class="flex items-center gap-2.5">
+        <span class="w-9 h-9 rounded-full flex items-center justify-center text-white" style="background:var(--grad-rose)"><i data-lucide="flower-2" class="w-4 h-4"></i></span>
+        <span class="font-brand text-2xl font-bold" style="background:var(--grad-rose);-webkit-background-clip:text;background-clip:text;color:transparent">Petal Kiss Closet</span>
+      </div>
+      <p class="text-sm text-muted-c mt-4 max-w-xs leading-relaxed">Curated preloved fashion for the romantic minimalist. Every piece has a past; every look, a future.</p>
+      <div class="flex gap-2 mt-5">
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="icon-btn !w-9 !h-9 border border-[rgba(247,187,211,.7)]" aria-label="Instagram"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+        <a href="https://facebook.com" target="_blank" rel="noopener" class="icon-btn !w-9 !h-9 border border-[rgba(247,187,211,.7)]" aria-label="Facebook"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+        <a href="mailto:hello@petalkisscloset.ph" class="icon-btn !w-9 !h-9 border border-[rgba(247,187,211,.7)]" aria-label="Email"><i data-lucide="mail" class="w-4 h-4"></i></a>
+      </div>
+    </div>
+    <div>
+      <p class="text-xs tracking-[.22em] uppercase font-semibold text-rose-deep">Explore</p>
+      <ul class="mt-4 space-y-2.5 text-sm text-muted-c">
+        <li><button class="hover:text-rose-deep transition-colors cursor-pointer bg-transparent border-none p-0 text-inherit" data-action="nav-view" data-view="shop">Shop the collection</button></li>
+        <li><button class="hover:text-rose-deep transition-colors cursor-pointer bg-transparent border-none p-0 text-inherit" data-action="nav-view" data-view="about">Our story</button></li>
+        <li><button class="hover:text-rose-deep transition-colors cursor-pointer bg-transparent border-none p-0 text-inherit" data-action="nav-view" data-view="profile">Your profile</button></li>
+        <li><button class="hover:text-rose-deep transition-colors cursor-pointer bg-transparent border-none p-0 text-inherit" data-action="open-cart">Shopping bag</button></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-xs tracking-[.22em] uppercase font-semibold text-rose-deep">The fine print</p>
+      <ul class="mt-4 space-y-2.5 text-sm text-muted-c">
+        <li class="flex items-center gap-2"><i data-lucide="truck" class="w-3.5 h-3.5"></i> Free shipping over ₱999</li>
+        <li class="flex items-center gap-2"><i data-lucide="shield-check" class="w-3.5 h-3.5"></i> 12-point quality check</li>
+        <li class="flex items-center gap-2"><i data-lucide="sparkles" class="w-3.5 h-3.5"></i> New drops every Friday</li>
+        <li class="flex items-center gap-2"><i data-lucide="leaf" class="w-3.5 h-3.5"></i> Recycled packaging</li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-[rgba(247,187,211,.5)] pt-5 pb-24 md:pb-5 text-center text-[.72rem] text-muted-c tracking-wide">
+    <span class="font-brand text-base text-rose">Petal Kiss Closet</span> · <span id="year"></span> · thrifted with love in the Philippines
+  </div>
+</footer>
+
+<!-- ================= MOBILE BOTTOM NAV ================= -->
+<nav class="md:hidden fixed bottom-3 left-3 right-3 z-40 glass border border-[rgba(247,187,211,.7)] rounded-2xl flex items-center justify-around py-1.5" style="box-shadow:0 18px 40px -18px rgba(75,46,60,.4)">
+  <button class="bottom-nav-item bg-transparent border-none cursor-pointer" data-action="nav-view" data-view="shop" data-nav="shop"><i data-lucide="store" class="w-5 h-5"></i>Shop</button>
+  <button class="bottom-nav-item bg-transparent border-none cursor-pointer" data-action="nav-view" data-view="about" data-nav="about"><i data-lucide="info" class="w-5 h-5"></i>About</button>
+  <button class="bottom-nav-item bg-transparent border-none cursor-pointer" data-action="nav-view" data-view="profile" data-nav="profile"><i data-lucide="user" class="w-5 h-5"></i>Profile</button>
+</nav>
+
+<!-- ================= PAGE OVERLAY ================= -->
+<div id="pageOverlay" data-action="close-cart"></div>
+
+<!-- ================= CART SIDEBAR ================= -->
+<aside id="cartSidebar" aria-label="Shopping bag">
+  <div class="flex items-center justify-between px-6 py-5 border-b border-[rgba(247,187,211,.6)]" style="background:linear-gradient(120deg,rgba(253,234,241,.9),rgba(255,252,253,.9))">
+    <div class="flex items-center gap-3">
+      <span class="w-10 h-10 rounded-full flex items-center justify-center text-white" style="background:var(--grad-rose)"><i data-lucide="shopping-bag" class="w-4.5 h-4.5"></i></span>
+      <div>
+        <p class="font-display font-bold text-lg leading-none">Your Closet Bag</p>
+        <p class="text-[.68rem] text-muted-c mt-1" id="cartCountLabel">0 items</p>
+      </div>
+    </div>
+    <button class="icon-btn" data-action="close-cart" aria-label="Close cart"><i data-lucide="x" class="w-5 h-5"></i></button>
+  </div>
+
+  <div id="cartItems" class="flex-1 overflow-y-auto px-5 py-4 space-y-3.5"></div>
+
+  <div id="cartFoot" class="border-t border-[rgba(247,187,211,.6)] px-6 py-5 space-y-4" style="background:linear-gradient(180deg,rgba(255,252,253,.9),rgba(253,234,241,.7))">
+    <div id="shipProgress"></div>
+    <div class="flex items-center justify-between">
+      <span class="text-sm text-muted-c">Subtotal</span>
+      <span class="font-display font-bold text-xl text-rose-deep" id="cartSubtotal">₱0</span>
+    </div>
+    <p class="text-[.68rem] text-muted-c -mt-2">Shipping &amp; fees calculated at checkout.</p>
+    <button class="btn-primary w-full" data-action="checkout" id="checkoutBtn">
+      Proceed to Checkout <i data-lucide="arrow-right" class="w-4 h-4"></i>
+    </button>
+  </div>
+</aside>
+
+<!-- ================= CHECKOUT MODAL ================= -->
+<div id="checkoutModal" class="modal">
+  <div class="modal-bg" data-action="close-checkout"></div>
+  <div class="panel w-full max-w-4xl card !rounded-[1.6rem] overflow-hidden max-h-[92dvh] flex flex-col">
+    <div class="flex items-center justify-between px-6 sm:px-8 py-5 border-b border-[rgba(247,187,211,.6)] flex-none" style="background:linear-gradient(120deg,rgba(253,234,241,.9),rgba(255,252,253,.9))">
+      <div>
+        <p class="kicker !text-lg">almost yours</p>
+        <h3 class="font-display font-bold text-xl sm:text-2xl -mt-0.5">Checkout</h3>
+      </div>
+      <button class="icon-btn" data-action="close-checkout" aria-label="Close checkout"><i data-lucide="x" class="w-5 h-5"></i></button>
+    </div>
+
+    <div class="overflow-y-auto">
+      <div class="grid lg:grid-cols-[1.15fr,1fr]">
+        <!-- LEFT: details + payment -->
+        <div class="p-6 sm:p-8 space-y-7">
+          <div>
+            <p class="flex items-center gap-3 font-display font-bold"><span class="step-dot">1</span> Delivery details</p>
+            <div class="grid sm:grid-cols-2 gap-3.5 mt-4">
+              <div class="sm:col-span-2"><input id="co-name" class="input" placeholder="Full name"></div>
+              <input id="co-phone" class="input" placeholder="Phone (e.g. 0917 123 4567)" inputmode="tel">
+              <input id="co-email" class="input" placeholder="Email address" inputmode="email">
+              <div class="sm:col-span-2"><textarea id="co-address" class="input resize-none" rows="2" placeholder="Complete delivery address (house/street, barangay, city, province, zip)"></textarea></div>
+            </div>
+          </div>
+
+          <div>
+            <p class="flex items-center gap-3 font-display font-bold"><span class="step-dot">2</span> Payment method</p>
+            <div class="grid gap-3 mt-4">
+              <button class="pay-card" data-action="pay-select" data-pay="gcash">
+                <span class="pay-radio"></span>
+                <span class="w-9 h-9 rounded-xl flex items-center justify-center flex-none" style="background:#E8F1FF;color:#2B6CB0"><i data-lucide="smartphone" class="w-4.5 h-4.5"></i></span>
+                <span><span class="block text-sm font-semibold">GCash</span><span class="block text-[.7rem] text-muted-c mt-0.5">Send payment, then enter your reference number.</span></span>
+              </button>
+              <div id="pay-gcash" class="pay-detail hidden rounded-xl border border-[rgba(247,187,211,.8)] p-4 bg-[rgba(253,234,241,.5)]">
+                <div class="flex items-center justify-between gap-3 flex-wrap">
+                  <div>
+                    <p class="text-[.66rem] tracking-[.16em] uppercase text-muted-c">Send to GCash</p>
+                    <p class="font-semibold text-sm mt-1">0917 234 5678 · <span class="text-rose-deep">Petal Kiss Closet</span></p>
+                  </div>
+                  <button class="btn-ghost !py-1.5 !px-3.5 !text-[.7rem]" data-action="copy" data-copy="09172345678"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+                <input id="ref-gcash" class="input mt-3" placeholder="GCash reference number (13 digits)" inputmode="numeric">
+              </div>
+
+              <button class="pay-card" data-action="pay-select" data-pay="cod">
+                <span class="pay-radio"></span>
+                <span class="w-9 h-9 rounded-xl flex items-center justify-center flex-none" style="background:var(--sage-soft);color:#5E7351"><i data-lucide="banknote" class="w-4.5 h-4.5"></i></span>
+                <span><span class="block text-sm font-semibold">Cash on Delivery</span><span class="block text-[.7rem] text-muted-c mt-0.5">Pay in cash when your parcel arrives. <b class="text-rose-deep">+₱50 handling fee.</b></span></span>
+              </button>
+              <div id="pay-cod" class="pay-detail hidden rounded-xl border border-[rgba(169,185,157,.5)] p-4" style="background:rgba(228,235,221,.45)">
+                <p class="text-xs text-muted-c flex items-center gap-2"><i data-lucide="info" class="w-3.5 h-3.5 flex-none"></i> A ₱50 COD handling fee has been added to your total. Please prepare exact change for our courier.</p>
+              </div>
+
+              <button class="pay-card" data-action="pay-select" data-pay="bank">
+                <span class="pay-radio"></span>
+                <span class="w-9 h-9 rounded-xl flex items-center justify-center flex-none" style="background:#F6EEDA;color:#9A7A33"><i data-lucide="landmark" class="w-4.5 h-4.5"></i></span>
+                <span><span class="block text-sm font-semibold">Bank Transfer</span><span class="block text-[.7rem] text-muted-c mt-0.5">Transfer via InstaPay, then enter your reference number.</span></span>
+              </button>
+              <div id="pay-bank" class="pay-detail hidden rounded-xl border border-[rgba(234,217,188,.9)] p-4" style="background:rgba(246,238,218,.5)">
+                <div class="flex items-center justify-between gap-3 flex-wrap">
+                  <div>
+                    <p class="text-[.66rem] tracking-[.16em] uppercase text-muted-c">BDO Unibank</p>
+                    <p class="font-semibold text-sm mt-1">0045 6789 0123 · <span class="text-rose-deep">Petal Kiss Closet</span></p>
+                  </div>
+                  <button class="btn-ghost !py-1.5 !px-3.5 !text-[.7rem]" data-action="copy" data-copy="004567890123"><i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy</button>
+                </div>
+                <input id="ref-bank" class="input mt-3" placeholder="Bank transfer reference number" inputmode="numeric">
+              </div>
+            </div>
+            <p class="text-[.66rem] text-muted-c mt-4 flex items-center gap-1.5"><i data-lucide="lock" class="w-3 h-3"></i> Demo boutique — no real payment is processed.</p>
+          </div>
+        </div>
+
+        <!-- RIGHT: summary -->
+        <div class="p-6 sm:p-8 border-t lg:border-t-0 lg:border-l border-[rgba(247,187,211,.6)]" style="background:linear-gradient(160deg,rgba(253,234,241,.7),rgba(255,248,250,.9))">
+          <p class="font-display font-bold">Order summary</p>
+          <div id="coItems" class="mt-4 space-y-3 max-h-44 overflow-y-auto pr-1"></div>
+          <div id="coSummary" class="mt-5 pt-4 border-t border-dashed border-[rgba(222,108,147,.3)] space-y-2 text-sm"></div>
+          <button class="btn-primary w-full mt-6" data-action="place-order">
+            <i data-lucide="heart" class="w-4 h-4"></i> Place Order
+          </button>
+          <p class="text-[.66rem] text-muted-c text-center mt-3">By placing this order you agree to our petal-pink promises.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SUCCESS MODAL ================= -->
+<div id="successModal" class="modal">
+  <div class="modal-bg"></div>
+  <div class="panel w-full max-w-md card !rounded-[1.8rem] p-8 sm:p-10 text-center overflow-hidden relative">
+    <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-30" style="background:radial-gradient(circle,var(--pink-200),transparent 70%)"></div>
+    <div class="relative">
+      <span class="check-ring inline-flex w-20 h-20 rounded-full items-center justify-center text-white" style="background:var(--grad-rose);box-shadow:0 20px 40px -14px rgba(194,78,119,.6)">
+        <i data-lucide="check" class="w-9 h-9"></i>
+      </span>
+      <h3 class="font-display font-bold text-2xl mt-6">Order placed, lovely!</h3>
+      <p class="text-sm text-muted-c mt-2 leading-relaxed">Your pieces are being wrapped in tissue and petals. A confirmation has been sent to your email.</p>
+      <div class="mt-6 rounded-2xl border border-dashed border-[rgba(222,108,147,.4)] bg-[rgba(253,234,241,.6)] px-5 py-4">
+        <p class="text-[.64rem] tracking-[.24em] uppercase text-muted-c">Order ID</p>
+        <p class="font-display font-bold text-xl text-rose-deep mt-0.5" id="successOrderId">PKC-000000</p>
+        <p class="text-xs text-muted-c mt-2">Total: <b class="text-ink" id="successTotal">₱0</b> · <span id="successPay">GCash</span></p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 mt-7">
+        <button class="btn-primary flex-1 !px-4" data-action="view-orders"><i data-lucide="package" class="w-4 h-4"></i> Track in Profile</button>
+        <button class="btn-ghost flex-1 !px-4" data-action="continue-shopping">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= TOASTS ================= -->
+<div id="toasts" aria-live="polite"></div>
+
+<script>
+/* ================================================================
+   PETAL KISS CLOSET — application logic
+================================================================ */
+const $  = (s, c=document) => c.querySelector(s);
+const $$ = (s, c=document) => [...c.querySelectorAll(s)];
+const peso = n => '₱' + Number(n).toLocaleString('en-PH');
+const store = {
+  get(k, f){ try { const v = localStorage.getItem(k); return v !== null ? JSON.parse(v) : f; } catch(e){ return f; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+};
+const icons = () => { if (window.lucide) lucide.createIcons(); };
+
+/* ---------------- Catalog ---------------- */
+const IMG = id => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop`;
+const PRODUCTS = [
+  { id:1,  name:'Rosette Tulle Midi Dress',   cat:'Dresses',     price:1250, was:3800, cond:'Like New',    condKey:'like-new',    badge:'Hot', img:IMG(9800070),  added:16 },
+  { id:2,  name:'Blush Satin Bow Blouse',     cat:'Tops',        price:480,  was:1450, cond:'Like New',    condKey:'like-new',    badge:'New', img:IMG(15921814), added:14 },
+  { id:3,  name:'Baby’s Breath Sundress',     cat:'Dresses',     price:890,  was:2600, cond:'Gently Used', condKey:'gently-used', badge:'New', img:IMG(16791392), added:15 },
+  { id:4,  name:'Cloud-Soft Knit Cardigan',   cat:'Tops',        price:620,  was:1800, cond:'Excellent',   condKey:'excellent',   badge:null,  img:IMG(11446757), added:9  },
+  { id:5,  name:'Pleated Pearl Midi Skirt',   cat:'Bottoms',     price:540,  was:1600, cond:'Like New',    condKey:'like-new',    badge:null,  img:IMG(4690501),  added:8  },
+  { id:6,  name:'Vintage Wash Denim Jacket',  cat:'Tops',        price:750,  was:2200, cond:'Gently Used', condKey:'gently-used', badge:'Hot', img:IMG(19871704), added:11 },
+  { id:7,  name:'Rosé Quilted Shoulder Bag',  cat:'Bags',        price:1150, was:3400, cond:'Excellent',   condKey:'excellent',   badge:'Hot', img:IMG(21897146), added:13 },
+  { id:8,  name:'Blush Mini Handbag',         cat:'Bags',        price:980,  was:2900, cond:'Like New',    condKey:'like-new',    badge:null,  img:IMG(21897149), added:7  },
+  { id:9,  name:'Starlight Pearl Necklace',   cat:'Accessories', price:380,  was:1100, cond:'Like New',    condKey:'like-new',    badge:'New', img:IMG(34372569), added:12 },
+  { id:10, name:'Heirloom Pearls & Ring Set', cat:'Accessories', price:450,  was:1350, cond:'Excellent',   condKey:'excellent',   badge:null,  img:IMG(28436705), added:6  },
+  { id:11, name:'Ivory Bow Stilettos',        cat:'Shoes',       price:720,  was:2100, cond:'Like New',    condKey:'like-new',    badge:null,  img:IMG(34327718), added:5  },
+  { id:12, name:'Scarlet Rose Pumps',         cat:'Shoes',       price:860,  was:2550, cond:'Gently Used', condKey:'gently-used', badge:'Hot', img:IMG(5713781),  added:10 },
+  { id:13, name:'Featherlight Rose Frock',    cat:'Dresses',     price:1050, was:3100, cond:'Excellent',   condKey:'excellent',   badge:'New', img:IMG(13915355), added:17 },
+  { id:14, name:'Moonbeam Knit Pullover',     cat:'Tops',        price:580,  was:1700, cond:'Gently Used', condKey:'gently-used', badge:null,  img:IMG(6968313),  added:4  },
+  { id:15, name:'City Pleat Wool Skirt',      cat:'Bottoms',     price:490,  was:1450, cond:'Excellent',   condKey:'excellent',   badge:null,  img:IMG(28497015), added:3  },
+  { id:16, name:'Ivory Wide-Leg Trousers',    cat:'Bottoms',     price:560,  was:1650, cond:'Like New',    condKey:'like-new',    badge:null,  img:IMG(9527338),  added:2  },
+];
+const CATEGORIES = [
+  { name:'All',         icon:'sparkles'   },
+  { name:'Tops',        icon:'shirt'      },
+  { name:'Dresses',     icon:'flower-2'   },
+  { name:'Bottoms',     icon:'layers'     },
+  { name:'Bags',        icon:'handbag'    },
+  { name:'Accessories', icon:'gem'        },
+  { name:'Shoes',       icon:'footprints' },
+];
+const TESTIMONIALS = [
+  { name:'Camille R.', place:'Quezon City', text:'The tulle dress I got looked brand new — you can tell each piece is inspected with so much care. My closet has never smelled this romantic.' },
+  { name:'Bea S.', place:'Cebu', text:'I’ve stopped buying fast fashion entirely. Petal Kiss made sustainable feel luxurious, and shipping to Cebu was quick and plastic-free.' },
+  { name:'Aira M.', place:'Davao', text:'Scored a quilted bag at a third of its retail price. The condition notes are honest, the photos are accurate, and checkout via GCash took two minutes.' },
+];
+const MARQUEE_ITEMS = ['Quality-checked preloved','Free shipping over ₱999','New drops every Friday','Sustainably sourced','Up to 70% below retail','Wrapped in petals, not plastic'];
+
+/* ---------------- State ---------------- */
+const FREE_SHIP = 999, SHIP_FEE = 80, COD_FEE = 50;
+let cart      = store.get('pkc_cart', []);
+let wishlist  = store.get('pkc_wishlist', []);
+let user      = store.get('pkc_user', null);
+let orders    = store.get('pkc_orders', []);
+let view = 'shop', activeCat = 'All', sortBy = 'featured', condFilter = 'all', query = '', payMethod = null;
+
+const PR = id => PRODUCTS.find(p => p.id === Number(id));
+const cartCount = () => cart.reduce((s,i)=>s+i.qty,0);
+function totals(){
+  const sub  = cart.reduce((s,i)=> s + PR(i.id).price * i.qty, 0);
+  const ship = sub === 0 ? 0 : (sub >= FREE_SHIP ? 0 : SHIP_FEE);
+  const fee  = payMethod === 'cod' ? COD_FEE : 0;
+  return { sub, ship, fee, total: sub + ship + fee };
+}
+
+/* ---------------- Toasts ---------------- */
+function toast(msg, type='success'){
+  const wrap = $('#toasts');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  const ic = type === 'error' ? 'circle-alert' : (type === 'heart' ? 'heart' : 'circle-check');
+  el.innerHTML = `<span class="w-7 h-7 rounded-full flex items-center justify-center flex-none text-white" style="background:${type==='error'?'linear-gradient(135deg,#F08AAE,#E0526A)':'var(--grad-rose)'}"><i data-lucide="${ic}" class="w-3.5 h-3.5"></i></span><span>${msg}</span>`;
+  wrap.appendChild(el); icons();
+  setTimeout(()=>{ el.classList.add('out'); setTimeout(()=>el.remove(), 400); }, 3000);
+}
+
+/* ---------------- Petals ---------------- */
+(function initPetals(){
+  const wrap = $('#petals');
+  const colors = [
+    'linear-gradient(135deg,#FBD9E6,#F19CBC)',
+    'linear-gradient(135deg,#FDEAF1,#F7BBD3)',
+    'linear-gradient(135deg,#F7BBD3,#E88CAB)',
+    'linear-gradient(135deg,#FBEFC9,#E7CE9C)',
+    'linear-gradient(135deg,#E4EBDD,#C3D2B6)'
+  ];
+  const N = window.innerWidth < 640 ? 14 : 22;
+  for (let i=0;i<N;i++){
+    const p = document.createElement('div');
+    const s = document.createElement('span');
+    const size = 10 + Math.random()*16;
+    const dur  = 9 + Math.random()*13;
+    p.className = 'petal' + (Math.random() < .3 ? ' far' : '');
+    p.style.left = Math.random()*100 + 'vw';
+    p.style.animationDuration = dur + 's';
+    p.style.animationDelay = (-Math.random()*dur) + 's';
+    p.style.setProperty('--rot', (140 + Math.random()*260) + 'deg');
+    s.style.width  = size + 'px';
+    s.style.height = size*.82 + 'px';
+    s.style.background = colors[Math.floor(Math.random()* (Math.random()<.82 ? 3 : colors.length))];
+    s.style.opacity = .35 + Math.random()*.45;
+    s.style.animationDuration = (2.6 + Math.random()*3.4) + 's';
+    s.style.animationDelay = (-Math.random()*4) + 's';
+    s.style.setProperty('--sway', (18 + Math.random()*30) + 'px');
+    p.appendChild(s); wrap.appendChild(p);
+  }
+})();
+
+/* ---------------- Marquee ---------------- */
+(function initMarquee(){
+  const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
+  $('#marqueeTrack').innerHTML = items.map(t => `
+    <span class="flex items-center gap-3 text-[.72rem] tracking-[.22em] uppercase text-muted-c whitespace-nowrap">
+      <i data-lucide="flower-2" class="w-3.5 h-3.5 text-rose spin-slower"></i>${t}
+    </span>`).join('');
+})();
+
+/* ---------------- Testimonials ---------------- */
+(function initTestimonials(){
+  $('#testimonials').innerHTML = TESTIMONIALS.map((t,i)=>`
+    <div class="testi-card card p-7 pt-9 reveal" style="transition-delay:${i*.08}s">
+      <span class="qmark"><i data-lucide="quote" class="w-4 h-4" style="fill:#fff"></i></span>
+      <div class="flex gap-1 text-gold">${'<i data-lucide="star" class="w-3.5 h-3.5" style="fill:var(--gold)"></i>'.repeat(5)}</div>
+      <p class="text-sm text-muted-c leading-relaxed mt-4">“${t.text}”</p>
+      <div class="flex items-center gap-3 mt-6 pt-5 border-t border-[rgba(247,187,211,.5)]">
+        <span class="w-10 h-10 rounded-full flex items-center justify-center text-white font-display font-bold" style="background:var(--grad-rose)">${t.name[0]}</span>
+        <div><p class="font-semibold text-sm">${t.name}</p><p class="text-[.68rem] text-muted-c">${t.place} · Verified buyer</p></div>
+      </div>
+    </div>`).join('');
+})();
+
+/* ---------------- Shop rendering ---------------- */
+function renderCategories(){
+  $('#categoryChips').innerHTML = CATEGORIES.map(c=>{
+    const n = c.name==='All' ? PRODUCTS.length : PRODUCTS.filter(p=>p.cat===c.name).length;
+    return `<button class="chip ${activeCat===c.name?'active':''}" data-action="cat" data-cat="${c.name}">
+      <i data-lucide="${c.icon}" class="w-3.5 h-3.5"></i>${c.name}<span class="count">(${n})</span>
+    </button>`;
+  }).join('');
+  icons();
+}
+
+function getFiltered(){
+  let list = PRODUCTS.filter(p =>
+    (activeCat==='All' || p.cat===activeCat) &&
+    (condFilter==='all' || p.condKey===condFilter) &&
+    (!query || (p.name+' '+p.cat+' '+p.cond).toLowerCase().includes(query)));
+  if (sortBy==='price-asc')  list = [...list].sort((a,b)=>a.price-b.price);
+  if (sortBy==='price-desc') list = [...list].sort((a,b)=>b.price-a.price);
+  if (sortBy==='newest')     list = [...list].sort((a,b)=>b.added-a.added);
+  return list;
+}
+
+function productCard(p, i){
+  const off = Math.round((1 - p.price/p.was) * 100);
+  const wished = wishlist.includes(p.id);
+  return `
+  <article class="product-card card overflow-hidden flex flex-col reveal" style="transition-delay:${Math.min(i,8)*.05}s">
+    <div class="relative overflow-hidden aspect-[4/5] bg-gradient-to-br from-[#FDEAF1] to-[#F7BBD3]">
+      <i data-lucide="flower-2" class="w-8 h-8 absolute inset-0 m-auto text-white/70"></i>
+      <img src="${p.img}" alt="${p.name}" loading="lazy" class="p-img relative w-full h-full object-cover opacity-0" onload="this.classList.remove('opacity-0')" onerror="this.remove()">
+      ${p.badge ? `<span class="badge ${p.badge==='Hot'?'hot':'new'} absolute top-3 left-3">${p.badge}</span>` : ''}
+      <button class="wish-btn ${wished?'active':''} absolute top-3 right-3" data-action="wish" data-id="${p.id}" aria-label="Toggle wishlist">
+        <i data-lucide="heart" class="w-4 h-4"></i>
+      </button>
+      <span class="absolute bottom-3 left-3 text-[.64rem] font-semibold text-white px-2.5 py-1 rounded-full" style="background:rgba(75,46,60,.55);backdrop-filter:blur(6px)">-${off}%</span>
+    </div>
+    <div class="p-4 sm:p-5 flex flex-col flex-1">
+      <span class="cond-pill cond-${p.condKey}"><i></i>${p.cond}</span>
+      <h3 class="font-display font-bold text-[.95rem] sm:text-base leading-snug mt-2">${p.name}</h3>
+      <div class="flex items-baseline gap-2 mt-1.5 mb-4">
+        <span class="text-[.72rem] text-muted-c line-through">${peso(p.was)}</span>
+        <span class="font-display font-bold text-lg text-rose-deep">${peso(p.price)}</span>
+      </div>
+      <div class="mt-auto">
+        <button class="add-btn" data-action="add-cart" data-id="${p.id}">
+          <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i> Add to Cart
+        </button>
+      </div>
+    </div>
+  </article>`;
+}
+
+function renderGrid(){
+  const list = getFiltered();
+  $('#productGrid').innerHTML = list.map(productCard).join('');
+  $('#gridEmpty').classList.toggle('hidden', list.length > 0);
+  $('#resultsMeta').textContent = `${list.length} piece${list.length===1?'':'s'} ${query ? `for “${query}”` : 'in bloom'}`;
+  icons(); observeReveals();
+}
+
+/* ---------------- Cart ---------------- */
+function persistCart(){ store.set('pkc_cart', cart); }
+
+function addToCart(id){
+  const item = cart.find(i=>i.id===Number(id));
+  if (item) item.qty++; else cart.push({ id:Number(id), qty:1 });
+  persistCart(); updateCartUI(true);
+  toast(`${PR(id).name} added to your bag`, 'heart');
+}
+
+function updateCartUI(pop=false){
+  const n = cartCount();
+  const badge = $('#cartBadge');
+  badge.textContent = n;
+  badge.classList.toggle('scale-0', n===0);
+  if (pop && n>0){ badge.classList.remove('badge-pop'); void badge.offsetWidth; badge.classList.add('badge-pop'); }
+  $('#cartCountLabel').textContent = `${n} item${n===1?'':'s'}`;
+
+  const wrap = $('#cartItems');
+  if (cart.length === 0){
+    wrap.innerHTML = `
+      <div class="h-full flex flex-col items-center justify-center text-center py-16">
+        <span class="w-20 h-20 rounded-full flex items-center justify-center" style="background:var(--blush)"><i data-lucide="shopping-bag" class="w-8 h-8 text-rose"></i></span>
+        <p class="font-display font-bold text-lg mt-5">Your bag is empty</p>
+        <p class="text-xs text-muted-c mt-1.5 max-w-[13rem] leading-relaxed">Nothing tucked in here yet. Something preloved is waiting to be reloved.</p>
+        <button class="btn-primary mt-6 !py-2.5 !px-6 text-sm" data-action="browse">Browse pieces</button>
+      </div>`;
+  } else {
+    wrap.innerHTML = cart.map(i=>{
+      const p = PR(i.id);
+      return `
+      <div class="flex gap-3.5 p-3 rounded-2xl border border-[rgba(247,187,211,.55)] bg-white/70">
+        <div class="w-[4.4rem] h-[5.4rem] rounded-xl overflow-hidden flex-none bg-gradient-to-br from-[#FDEAF1] to-[#F7BBD3]">
+          <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-start justify-between gap-2">
+            <p class="font-display font-bold text-sm leading-snug line-clamp-2">${p.name}</p>
+            <button class="text-muted-c hover:text-rose-deep transition-colors flex-none cursor-pointer bg-transparent border-none p-0" data-action="remove-item" data-id="${p.id}" aria-label="Remove item"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+          </div>
+          <p class="text-[.68rem] text-muted-c mt-0.5">${p.cond} · ${peso(p.price)} each</p>
+          <div class="flex items-center justify-between mt-2.5">
+            <div class="flex items-center gap-1 border border-[rgba(247,187,211,.8)] rounded-full px-1 py-0.5 bg-white">
+              <button class="icon-btn !w-6 !h-6" data-action="qty-dec" data-id="${p.id}" aria-label="Decrease quantity"><i data-lucide="minus" class="w-3 h-3"></i></button>
+              <span class="text-xs font-semibold w-5 text-center">${i.qty}</span>
+              <button class="icon-btn !w-6 !h-6" data-action="qty-inc" data-id="${p.id}" aria-label="Increase quantity"><i data-lucide="plus" class="w-3 h-3"></i></button>
+            </div>
+            <span class="font-display font-bold text-rose-deep">${peso(p.price*i.qty)}</span>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  const { sub } = totals();
+  $('#cartSubtotal').textContent = peso(sub);
+  const prog = $('#shipProgress');
+  if (sub === 0){
+    prog.innerHTML = '';
+  } else if (sub >= FREE_SHIP){
+    prog.innerHTML = `<p class="text-[.72rem] flex items-center gap-1.5 text-[#5E7351] font-medium"><i data-lucide="party-popper" class="w-3.5 h-3.5"></i> You’ve unlocked <b>FREE shipping!</b></p>`;
+  } else {
+    const pct = Math.min(100, Math.round(sub/FREE_SHIP*100));
+    prog.innerHTML = `
+      <p class="text-[.72rem] text-muted-c mb-1.5">Add <b class="text-rose-deep">${peso(FREE_SHIP-sub)}</b> more for free shipping</p>
+      <div class="h-1.5 rounded-full bg-[var(--pink-100)] overflow-hidden"><div class="h-full rounded-full transition-all duration-700" style="width:${pct}%;background:var(--grad-rose)"></div></div>`;
+  }
+  $('#checkoutBtn').style.display = cart.length ? '' : 'none';
+  icons();
+}
+
+function openCart(){ $('#cartSidebar').classList.add('open'); $('#pageOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeCart(){ $('#cartSidebar').classList.remove('open'); $('#pageOverlay').classList.remove('open'); document.body.style.overflow=''; }
+
+/* ---------------- Checkout ---------------- */
+function openCheckout(){
+  if (!cart.length){ toast('Your bag is empty — add something lovely first', 'error'); return; }
+  closeCart();
+  if (user){
+    $('#co-name').value = user.name || '';
+    $('#co-phone').value = user.phone || '';
+    $('#co-email').value = user.email || '';
+    $('#co-address').value = user.address || '';
+  }
+  renderCheckoutSummary();
+  $('#checkoutModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCheckout(){ $('#checkoutModal').classList.remove('open'); document.body.style.overflow=''; }
+
+function selectPay(m){
+  payMethod = m;
+  $$('.pay-card').forEach(c => c.classList.toggle('selected', c.dataset.pay === m));
+  $$('.pay-detail').forEach(d => d.classList.add('hidden'));
+  const det = $('#pay-'+m); if (det) det.classList.remove('hidden');
+  renderCheckoutSummary(); icons();
+}
+
+function renderCheckoutSummary(){
+  const { sub, ship, fee, total } = totals();
+  $('#coItems').innerHTML = cart.map(i=>{
+    const p = PR(i.id);
+    return `<div class="flex items-center gap-3">
+      <div class="w-11 h-[3.4rem] rounded-lg overflow-hidden flex-none bg-gradient-to-br from-[#FDEAF1] to-[#F7BBD3]"><img src="${p.img}" class="w-full h-full object-cover" alt="" loading="lazy" onerror="this.remove()"></div>
+      <div class="flex-1 min-w-0"><p class="text-xs font-semibold truncate">${p.name}</p><p class="text-[.66rem] text-muted-c">× ${i.qty}</p></div>
+      <span class="text-xs font-semibold">${peso(p.price*i.qty)}</span>
+    </div>`;
+  }).join('');
+  $('#coSummary').innerHTML = `
+    <div class="flex justify-between"><span class="text-muted-c">Subtotal (${cartCount()} item${cartCount()===1?'':'s'})</span><span class="font-medium">${peso(sub)}</span></div>
+    <div class="flex justify-between"><span class="text-muted-c">Shipping ${sub>=FREE_SHIP?'<span class="text-[.62rem] text-[#5E7351] font-semibold tracking-wider ml-1">FREE over ₱999</span>':''}</span><span class="font-medium ${ship===0?'text-[#5E7351]':''}">${ship===0?'FREE':peso(ship)}</span></div>
+    ${fee ? `<div class="flex justify-between"><span class="text-muted-c">COD handling fee</span><span class="font-medium">${peso(fee)}</span></div>` : ''}
+    <div class="flex justify-between items-baseline pt-3 mt-1 border-t border-dashed border-[rgba(222,108,147,.3)]">
+      <span class="font-display font-bold">Grand total</span>
+      <span class="font-display font-black text-2xl text-rose-deep">${peso(total)}</span>
+    </div>`;
+}
+
+function markInvalid(el){ el.classList.add('input-error'); setTimeout(()=>el.classList.remove('input-error'), 1600); }
+
+function placeOrder(){
+  const f = {
+    name: $('#co-name').value.trim(),
+    phone: $('#co-phone').value.trim(),
+    email: $('#co-email').value.trim(),
+    address: $('#co-address').value.trim()
+  };
+  let ok = true;
+  if (!f.name){ markInvalid($('#co-name')); ok=false; }
+  if (f.phone.replace(/\D/g,'').length < 10){ markInvalid($('#co-phone')); ok=false; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email)){ markInvalid($('#co-email')); ok=false; }
+  if (f.address.length < 10){ markInvalid($('#co-address')); ok=false; }
+  if (!ok){ toast('Please complete your delivery details', 'error'); return; }
+  if (!payMethod){ toast('Please choose a payment method', 'error'); return; }
+  let ref = null;
+  if (payMethod === 'gcash' || payMethod === 'bank'){
+    ref = $('#ref-'+payMethod).value.trim();
+    if (ref.replace(/\D/g,'').length < 6){ markInvalid($('#ref-'+payMethod)); toast('Please enter a valid reference number', 'error'); return; }
+  }
+  const { sub, ship, fee, total } = totals();
+  const order = {
+    id: 'PKC-' + String(Date.now()).slice(-6) + Math.random().toString(36).slice(2,4).toUpperCase(),
+    date: new Date().toISOString(),
+    items: cart.map(i => { const p=PR(i.id); return { id:p.id, name:p.name, price:p.price, qty:i.qty, img:p.img }; }),
+    subtotal: sub, shipping: ship, fee, total,
+    payment: { method: payMethod, ref },
+    name: f.name, status: 'Processing'
+  };
+  orders.unshift(order); store.set('pkc_orders', orders);
+  cart = []; persistCart(); payMethod = null;
+  $$('.pay-card').forEach(c=>c.classList.remove('selected'));
+  $$('.pay-detail').forEach(d=>d.classList.add('hidden'));
+  ['ref-gcash','ref-bank'].forEach(id => { const el=$('#'+id); if(el) el.value=''; });
+  updateCartUI();
+  closeCheckout();
+  $('#successOrderId').textContent = order.id;
+  $('#successTotal').textContent = peso(order.total);
+  $('#successPay').textContent = {gcash:'GCash',cod:'Cash on Delivery',bank:'Bank Transfer'}[order.payment.method];
+  $('#successModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  icons();
+}
+
+/* ---------------- Profile ---------------- */
+const initials = name => name.split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
+
+function renderHeaderAvatar(){
+  $('#headerAvatar').innerHTML = user
+    ? `<span class="w-8 h-8 rounded-full flex items-center justify-center text-white text-[.7rem] font-semibold" style="background:var(--grad-rose);box-shadow:0 6px 14px -6px rgba(194,78,119,.6)">${initials(user.name)}</span>`
+    : `<i data-lucide="user" class="w-5 h-5"></i>`;
+  icons();
+}
+
+function renderProfile(){
+  const root = $('#profileRoot');
+  if (!user){
+    root.innerHTML = `
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+      <div class="text-center lg:text-left">
+        <p class="kicker">your closet awaits</p>
+        <h2 class="font-display font-bold mt-3" style="font-size:clamp(2rem,4.5vw,3.2rem)">Join the <span class="accent">inner circle</span></h2>
+        <p class="text-muted-c text-sm sm:text-[.95rem] mt-4 leading-relaxed max-w-md mx-auto lg:mx-0">
+          Create a free account to check out faster, keep your details saved, and follow every order from our rack to your door.
+        </p>
+        <ul class="mt-7 space-y-3.5 max-w-sm mx-auto lg:mx-0 text-left">
+          ${[['heart','Save your wishlist across visits'],
+             ['package-check','Track order history & statuses'],
+             ['truck','One-tap checkout with saved address'],
+             ['sparkles','First dibs on Friday drops']].map(([ic,t])=>`
+          <li class="flex items-center gap-3.5 card !rounded-2xl px-4 py-3">
+            <span class="w-8 h-8 rounded-xl flex items-center justify-center text-white flex-none" style="background:var(--grad-rose)"><i data-lucide="${ic}" class="w-4 h-4"></i></span>
+            <span class="text-sm">${t}</span>
+          </li>`).join('')}
+        </ul>
+      </div>
+      <div class="card p-8 sm:p-10 text-center max-w-md w-full mx-auto relative overflow-hidden">
+        <div class="absolute -top-14 -right-14 w-44 h-44 rounded-full opacity-25" style="background:radial-gradient(circle,var(--pink-200),transparent 70%)"></div>
+        <span class="inline-flex w-16 h-16 rounded-full items-center justify-center text-rose-deep mx-auto" style="background:var(--blush)"><i data-lucide="lock" class="w-6 h-6"></i></span>
+        <h3 class="font-display font-bold text-2xl mt-5">Welcome back, lovely</h3>
+        <p class="text-xs text-muted-c mt-2 leading-relaxed">Sign in to unlock your saved details, wishlist and order history.</p>
+        <button id="googleBtn" class="mt-7 w-full flex items-center justify-center gap-3 rounded-full border border-[rgba(247,187,211,.9)] bg-white py-3.5 px-6 text-sm font-medium transition-all duration-300 hover:shadow-[var(--shadow-card)] hover:-translate-y-0.5 cursor-pointer" data-action="google-sign">
+          <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.7-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 40.4 44 35 44 24c0-1.3-.1-2.7-.4-3.9z"/></svg>
+          Continue with Google
+        </button>
+        <p class="text-[.64rem] text-muted-c mt-4 flex items-center justify-center gap-1.5"><i data-lucide="shield-check" class="w-3 h-3"></i> Simulated sign-in for this demo boutique</p>
+      </div>
+    </div>`;
+    icons(); observeReveals(); return;
+  }
+
+  const { sub } = totals();
+  const addr = user.address ? user.address : null;
+  root.innerHTML = `
+  <div>
+    <div class="text-center">
+      <p class="kicker">hello, gorgeous</p>
+      <h2 class="font-display font-bold mt-3" style="font-size:clamp(1.9rem,4vw,3rem)">Your <span class="accent">profile</span></h2>
+    </div>
+
+    <div class="card mt-9 p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-5 sm:gap-7 relative overflow-hidden">
+      <div class="absolute -top-16 -right-16 w-52 h-52 rounded-full opacity-20" style="background:radial-gradient(circle,var(--pink-200),transparent 70%)"></div>
+      <span class="w-20 h-20 rounded-full flex items-center justify-center text-white font-display font-bold text-2xl flex-none" style="background:var(--grad-rose);box-shadow:0 16px 32px -12px rgba(194,78,119,.6)">${initials(user.name)}</span>
+      <div class="text-center sm:text-left relative">
+        <p class="font-display font-bold text-xl">${user.name}</p>
+        <p class="text-xs text-muted-c mt-1 flex items-center gap-1.5 justify-center sm:justify-start"><i data-lucide="mail" class="w-3.5 h-3.5"></i>${user.email}</p>
+        <p class="text-[.64rem] tracking-[.18em] uppercase text-gold mt-2 font-semibold">Petal member · since 2024</p>
+      </div>
+      <button class="btn-ghost sm:ml-auto !py-2.5 !px-5 text-sm relative" data-action="sign-out"><i data-lucide="log-out" class="w-4 h-4"></i> Sign out</button>
+    </div>
+
+    <div class="grid lg:grid-cols-[1.05fr,.95fr] gap-6 mt-6">
+      <div class="card p-6 sm:p-7">
+        <p class="font-display font-bold flex items-center gap-2.5"><i data-lucide="pencil-line" class="w-4 h-4 text-rose"></i> Personal information</p>
+        <form id="profileForm" class="mt-5 space-y-3.5">
+          <div>
+            <label class="text-[.66rem] tracking-[.16em] uppercase text-muted-c font-medium">Full name</label>
+            <input id="pf-name" class="input mt-1.5" value="${user.name.replace(/"/g,'&quot;')}" placeholder="Your name">
+          </div>
+          <div>
+            <label class="text-[.66rem] tracking-[.16em] uppercase text-muted-c font-medium">Phone</label>
+            <input id="pf-phone" class="input mt-1.5" value="${(user.phone||'').replace(/"/g,'&quot;')}" placeholder="0917 123 4567" inputmode="tel">
+          </div>
+          <div>
+            <label class="text-[.66rem] tracking-[.16em] uppercase text-muted-c font-medium">Complete address</label>
+            <textarea id="pf-address" class="input mt-1.5 resize-none" rows="3" placeholder="House no., street, barangay, city, province, ZIP">${user.address||''}</textarea>
+          </div>
+          <button type="submit" class="btn-primary w-full !py-3"><i data-lucide="save" class="w-4 h-4"></i> Save changes</button>
+        </form>
+      </div>
+
+      <div class="space-y-6">
+        <div class="card p-6 sm:p-7">
+          <p class="font-display font-bold flex items-center gap-2.5"><i data-lucide="map-pin" class="w-4 h-4 text-rose"></i> Saved address</p>
+          ${addr
+            ? `<p class="text-sm text-muted-c mt-3 leading-relaxed">${addr}</p>
+               ${user.phone ? `<p class="text-xs text-muted-c mt-2 flex items-center gap-1.5"><i data-lucide="phone" class="w-3.5 h-3.5"></i>${user.phone}</p>`:''}`
+            : `<p class="text-sm text-muted-c mt-3 italic">No address saved yet — add one in the form and tap save.</p>`}
+        </div>
+
+        <div class="card p-6 sm:p-7 flex items-center gap-4">
+          <span class="w-11 h-11 rounded-2xl flex items-center justify-center text-white flex-none" style="background:var(--grad-rose)"><i data-lucide="shopping-bag" class="w-4.5 h-4.5"></i></span>
+          <div class="flex-1">
+            <p class="font-display font-bold">Cart status</p>
+            <p class="text-xs text-muted-c mt-0.5">${cartCount()} item${cartCount()===1?'':'s'} · ${peso(sub)} ${cartCount()?'· awaiting checkout':'· bag is empty'}</p>
+          </div>
+          ${cartCount() ? `<button class="btn-ghost !py-2 !px-4 text-xs" data-action="open-cart">View bag</button>` : `<button class="btn-ghost !py-2 !px-4 text-xs" data-action="scroll-shop">Shop now</button>`}
+        </div>
+
+        <div class="card p-6 sm:p-7">
+          <p class="font-display font-bold flex items-center gap-2.5"><i data-lucide="package" class="w-4 h-4 text-rose"></i> Order history <span class="text-[.62rem] font-sans font-medium text-muted-c tracking-wide ml-auto">${orders.length} order${orders.length===1?'':'s'}</span></p>
+          <div class="mt-4 space-y-3.5 max-h-72 overflow-y-auto pr-1">
+            ${orders.length ? orders.map(o=>`
+              <div class="rounded-2xl border border-[rgba(247,187,211,.6)] p-4 bg-white/70">
+                <div class="flex items-center justify-between gap-2 flex-wrap">
+                  <p class="font-semibold text-xs text-rose-deep">${o.id}</p>
+                  <span class="status-pill">${o.status}</span>
+                </div>
+                <p class="text-[.66rem] text-muted-c mt-1">${new Date(o.date).toLocaleDateString('en-PH',{month:'long',day:'numeric',year:'numeric'})} · ${{gcash:'GCash',cod:'Cash on Delivery',bank:'Bank Transfer'}[o.payment.method]}</p>
+                <div class="flex items-center gap-2 mt-3">
+                  ${o.items.slice(0,4).map(it=>`<img src="${it.img}" class="w-9 h-11 rounded-lg object-cover border border-white shadow-sm" alt="" loading="lazy" onerror="this.remove()">`).join('')}
+                  <span class="text-[.66rem] text-muted-c ml-1">${o.items.reduce((s,i)=>s+i.qty,0)} item${o.items.reduce((s,i)=>s+i.qty,0)===1?'':'s'}</span>
+                  <span class="font-display font-bold text-sm ml-auto">${peso(o.total)}</span>
+                </div>
+              </div>`).join('')
+            : `<div class="text-center py-8">
+                 <span class="inline-flex w-12 h-12 rounded-full items-center justify-center" style="background:var(--blush)"><i data-lucide="package-open" class="w-5 h-5 text-rose"></i></span>
+                 <p class="text-sm text-muted-c mt-3">No orders yet — your love stories will appear here.</p>
+               </div>`}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  icons(); observeReveals();
+}
+
+/* ---------------- Navigation ---------------- */
+function setView(v){
+  view = v;
+  ['shop','about','profile'].forEach(x => $('#view-'+x).classList.toggle('hidden', x!==v));
+  $$('[data-nav]').forEach(b => b.classList.toggle('active', b.dataset.nav===v));
+  if (v==='profile') renderProfile();
+  if (v==='about'){ icons(); observeReveals(); }
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function scrollToShop(){
+  if (view !== 'shop') setView('shop');
+  setTimeout(()=> $('#shopTop').scrollIntoView({ behavior:'smooth' }), 60);
+}
+
+/* ---------------- Global click delegation ---------------- */
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-action]');
+  if (!el) return;
+  const a = el.dataset.action, id = el.dataset.id;
+  switch(a){
+    case 'nav-view': setView(el.dataset.view); break;
+    case 'scroll-shop': scrollToShop(); break;
+    case 'cat': activeCat = el.dataset.cat; renderCategories(); renderGrid(); break;
+    case 'clear-filters': activeCat='All'; condFilter='all'; query=''; sortBy='featured';
+      $('#sortSelect').value='featured'; $('#condSelect').value='all';
+      $$('.search-input').forEach(i=>i.value='');
+      renderCategories(); renderGrid(); toast('Filters cleared — the whole garden is yours'); break;
+    case 'add-cart': addToCart(id); break;
+    case 'wish': {
+      const pid = Number(id);
+      const on = wishlist.includes(pid);
+      wishlist = on ? wishlist.filter(w=>w!==pid) : [...wishlist, pid];
+      store.set('pkc_wishlist', wishlist);
+      el.classList.toggle('active', !on);
+      toast(on ? 'Removed from wishlist' : 'Saved to your wishlist', on ? 'success' : 'heart');
+      break;
+    }
+    case 'open-cart': closeCheckout(); updateCartUI(); openCart(); break;
+    case 'close-cart': closeCart(); break;
+    case 'browse': closeCart(); scrollToShop(); break;
+    case 'qty-inc': { const it=cart.find(i=>i.id===Number(id)); if(it){it.qty++; persistCart(); updateCartUI();} break; }
+    case 'qty-dec': { const it=cart.find(i=>i.id===Number(id)); if(it){ it.qty--; if(it.qty<=0){ cart=cart.filter(i=>i.id!==Number(id)); toast('Removed from your bag'); } persistCart(); updateCartUI(); } break; }
+    case 'remove-item': cart = cart.filter(i=>i.id!==Number(id)); persistCart(); updateCartUI(); toast('Removed from your bag'); break;
+    case 'checkout': openCheckout(); break;
+    case 'close-checkout': closeCheckout(); break;
+    case 'pay-select': selectPay(el.dataset.pay); break;
+    case 'copy': {
+      const txt = el.dataset.copy;
+      if (navigator.clipboard) navigator.clipboard.writeText(txt).then(()=>toast('Copied to clipboard')).catch(()=>toast('Could not copy','error'));
+      break;
+    }
+    case 'place-order': placeOrder(); break;
+    case 'view-orders': $('#successModal').classList.remove('open'); document.body.style.overflow=''; setView('profile'); break;
+    case 'continue-shopping': $('#successModal').classList.remove('open'); document.body.style.overflow=''; scrollToShop(); break;
+    case 'google-sign': {
+      el.disabled = true;
+      el.innerHTML = '<i data-lucide="loader-circle" class="w-4 h-4 spin"></i> Signing you in…';
+      icons();
+      setTimeout(()=>{
+        user = { name:'Isabella Reyes', email:'isabella.reyes@gmail.com', phone:'0917 555 0123', address:'' };
+        store.set('pkc_user', user);
+        renderProfile(); renderHeaderAvatar();
+        toast('Welcome back, Isabella — your closet missed you', 'heart');
+      }, 1100);
+      break;
+    }
+    case 'sign-out':
+      user = null; store.set('pkc_user', null);
+      renderProfile(); renderHeaderAvatar();
+      toast('Signed out — stay lovely');
+      break;
+  }
+});
+
+/* profile form save (delegated submit) */
+document.addEventListener('submit', e => {
+  if (e.target.id !== 'profileForm') return;
+  e.preventDefault();
+  const name = $('#pf-name').value.trim();
+  if (!name){ markInvalid($('#pf-name')); toast('Please add your name', 'error'); return; }
+  user.name = name;
+  user.phone = $('#pf-phone').value.trim();
+  user.address = $('#pf-address').value.trim();
+  store.set('pkc_user', user);
+  renderProfile(); renderHeaderAvatar();
+  toast('Profile saved beautifully');
+});
+
+/* search */
+$$('.search-input').forEach(inp => inp.addEventListener('input', e => {
+  query = e.target.value.trim().toLowerCase();
+  $$('.search-input').forEach(o => { if (o !== e.target) o.value = e.target.value; });
+  if (view !== 'shop') setView('shop');
+  renderGrid();
+}));
+
+/* selects */
+$('#sortSelect').addEventListener('change', e => { sortBy = e.target.value; renderGrid(); });
+$('#condSelect').addEventListener('change', e => { condFilter = e.target.value; renderGrid(); });
+
+/* escape closes layers */
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  closeCart(); closeCheckout();
+  $('#successModal').classList.remove('open');
+  document.body.style.overflow='';
+});
+
+/* ---------------- Reveal on scroll ---------------- */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); revealObserver.unobserve(en.target); setTimeout(()=>{ en.target.style.transitionDelay='0s'; }, 950); } });
+}, { threshold:.12 });
+function observeReveals(){ $$('.reveal:not(.in)').forEach(el => revealObserver.observe(el)); }
+
+/* ---------------- Animated counters ---------------- */
+const counterObserver = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    const el = en.target, target = parseFloat(el.dataset.count), dec = Number(el.dataset.decimal||0);
+    const t0 = performance.now(), dur = 1600;
+    (function tick(t){
+      const p = Math.min(1, (t-t0)/dur), ease = 1 - Math.pow(1-p, 3);
+      el.textContent = (target*ease).toLocaleString('en-PH',{minimumFractionDigits:dec, maximumFractionDigits:dec});
+      if (p<1) requestAnimationFrame(tick);
+    })(t0);
+    counterObserver.unobserve(el);
+  });
+}, { threshold:.4 });
+$$('.count').forEach(el => counterObserver.observe(el));
+
+/* ---------------- Boot ---------------- */
+$('#year').textContent = new Date().getFullYear();
+cart = cart.filter(i => PR(i.id));
+persistCart();
+renderCategories();
+renderGrid();
+updateCartUI();
+renderHeaderAvatar();
+setView('shop');
+window.scrollTo(0,0);
+icons();
+observeReveals();
+</script>
+</body>
+</html>
